@@ -22,7 +22,19 @@ app.config.suppress_callback_exceptions = True
 # Load data from csv
 def load_data():
     # To do: Completar la función 
+    df = pd.read_csv('datos_energia.csv')
+
+    # Imprimir los nombres de las columnas para verificar
+    print("Nombres de las columnas en el DataFrame:", df.columns)
+
+    # Cambia 'time' por el nombre de la columna de fecha en tu CSV
+    if 'time' in df.columns:
+        df['time'] = pd.to_datetime(df['time'])  # Cambia 'fecha' por 'time'
+        df.set_index('time', inplace=True)  # Establecer 'time' como índice
+    else:
+        print("La columna 'time' no se encontró en el DataFrame.")
     
+    return df
 
 # Cargar datos
 data = load_data()
